@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.card__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    width: 100%;
+    height: 100vh;
+}
+.popup__carts{
+    position: absolute;
+    top: 15%;
+    left: 15.5%;
+}
+.popup__carts > .cart{
+    width: 80px;
+    height: 40px;
+    border: transparent;
+    background-color: blue;
+    color: white;
+    border-radius: 12px;
+}
+.popup__carts > .clearCart{
+    width: 100px;
+    height: 40px;
+    border: transparent;
+    background-color: blue;
+    color: white;
+    border-radius: 12px;
+}
