@@ -73,20 +73,6 @@ function setItems(product) {
     localStorage.setItem('productInCart', JSON.stringify(cartItems) )
 }
 
-// function totalCost(product) {
-//     // console.log('the product prize is ', product.price);
-//     let cartCost= localStorage.getItem('totalCost')
-//     console.log('my cart cost is ', cartCost);
-//     console.log(typeof cartCost);
-    
-//     if(cartCost != null){
-//         cartCost = parseInt(cartCost)
-//         localStorage.setItem('totalCost', cartCost + product.price)
-//     }else{
-//         localStorage.setItem("totalCost", product.price)
-//     }
-// }
-
 function totalCost(product) {
     let cartCost = localStorage.getItem('totalCost');
 
@@ -98,9 +84,52 @@ function totalCost(product) {
     cartCost = cartCost + parseFloat(product.price);
     localStorage.setItem('totalCost', cartCost.toString());
 
-    console.log('My cart cost is', cartCost);
-    console.log(typeof cartCost);
+    // console.log('My cart cost is', cartCost);
+    // console.log(typeof cartCost);
 }
 
+function displayCart() {
+    let cartItems = localStorage.getItem('productInCart');
+    cartItems= JSON.parse(cartItems);
+    let productContainer = document.querySelector('.products')
+    let cartCost = localStorage.getItem('totalCost');
+    console.log(cartItems);
+    if (cartItems && Object.keys(cartItems).length > 0  && productContainer) {
+        productContainer.innerHTML = ''
+        Object.values(cartItems).map((x)=>{
+            productContainer.innerHTML += `
+            <div class="js">
+            <div class="product">
+                <span class="icon">&times;</span>
+                <span>${x.name}<span>
+            </div>
+            <div class="price">$${x.price}</div>
+            <div class="quantity">
+            <i class="fa-solid fa-circle-minus decrease-btn"></i>
+            <span>${x.inCart}</span>
+            <i class="fa-solid fa-circle-plus increase-btn"></i>
+            </div>
+            <div class="total">
+                $${x.inCart * x.price}
+            </div>
+            </div>
+              `;
+        })
+
+        productContainer.innerHTML += `
+            <div class="basketTotalContainer">
+                <h4 class="basketTotalTitle">
+                    Basket Total:
+                </h4>
+                <h4 class="basketTotal">
+                    $${cartCost}
+                </h4>
+            </div>
+        `;      
+
+    }
+}
+  
 
 onLoadCartNumbers()
+displayCart()
